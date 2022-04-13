@@ -5,7 +5,7 @@ Implementation of Waterman-Smith with affine gap penalty
 This script only uses numpy v1.21.2 and pandas v1.3.4 as package dependencies
 
 ## Installation
-
+Run `pip install git+https://github.com/raylee92126/Waterman-Smith.git`
 
 ## Implementation
 To use script, run the following in the command line:
