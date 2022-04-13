@@ -211,4 +211,5 @@ Alignment Results:
 
 
 ### Run your Smith-Waterman Algorithm
-#runSW(args.input, args.score, args.output, args.opengap, args.extgap)
+if __name__ == "__main__":
+    runSW(args.input, args.score, args.output, args.opengap, args.extgap)
