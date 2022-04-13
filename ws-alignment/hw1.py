@@ -1,3 +1,11 @@
+#!/usr/bin/python
+
+__author__ = "Raymond Lee"
+__email__ = "raymond92126@gmail.com"
+__copyright__ = "None"
+__license__ = "MIT"
+__version__ = "0.0.1"
+
 import argparse
 import sys
 import numpy as np
