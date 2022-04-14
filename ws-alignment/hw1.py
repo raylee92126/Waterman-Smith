@@ -22,7 +22,14 @@ parser.add_argument('-o', '--opengap', help='open gap', required=False, default=
 parser.add_argument('-e', '--extgap', help='extension gap', required=False, default=-1)
 args = parser.parse_args()
 
+#auxillary function used to write dataframe to a specific opened file
 def writedf(df, opened_file):
+    '''
+    Auxillary function used to write dataframe to a specific opened file
+    df: a pandas dataframe
+    opened_file: an opened file (type file)
+    '''
+
     colnames_list = df.columns.to_list()
     printed_colnames = "\t".join(map(str, colnames_list))
     opened_file.write(printed_colnames)
@@ -33,7 +40,12 @@ def writedf(df, opened_file):
         opened_file.write(printed_row)
         opened_file.write("\n")
 
-def printdf(df, opened_file):
+#auxillary funxtion used to print dataframe into stdout
+def printdf(df):
+    '''
+    Auxillary function used to write dataframe to stdout using print
+    df: a pandas dataframe
+    '''
     colnames_list = df.columns.to_list()
     printed_colnames = "\t".join(map(str, colnames_list))
     print(printed_colnames)
@@ -44,6 +56,17 @@ def printdf(df, opened_file):
 
 
 def runSW(inputFile, scoreFile, outputFile, openGap, extGap):
+    '''
+    a function used to run the Smith-Waterman Algorithm (as detailed on https://en.wikipedia.org/wiki/Smith-Waterman_algorithm),
+    having support for affine gap penalties
+    inputFile: the input file containing two sequences of strings to be aligned
+    scoreFile: a file detailing the award/ penalty of each match and mismatch
+    outputFile: the file in which the output is to be written (OUR FUNCTION DOES NOT SUPPORT REDIRECTING OUTPUT OF BASH)
+    openGap: the initial penalty for opening a gap
+    extGap: additional penalties for extending an already opened gap
+
+    This function does not return, but rather directly prints into a file or stdout (depending on using printdf or writedf)
+    '''
     ### load scoreFile
     score_df = pd.read_csv(scoreFile, header=0, delim_whitespace=True, index_col=0)
 
@@ -209,9 +232,7 @@ Alignment Results:
 {output_seq2}
 """.format(max_score=alignment_score, output_seq1=seq1_out, bars=bars_out, output_seq2=seq2_out)
     
-    # print(output1)
-    # #printdf(main_df)
-    # print(output2)
+
     with open(outputFile, "w") as outfile:
         outfile.write(output1)
         writedf(main_df, outfile)
